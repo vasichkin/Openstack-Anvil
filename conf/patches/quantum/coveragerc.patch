@@ -1,0 +1,25 @@
+From bb4d4b7acd3c664ebd638e9d53e7092bf0b348ed Mon Sep 17 00:00:00 2001
+From: root <root@a010.altai-dev.griddynamics.net>
+Date: Tue, 19 Mar 2013 03:55:05 +0400
+Subject: [PATCH] coveragerc
+
+---
+ .coveragerc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/.coveragerc b/.coveragerc
+index cd84ef9..909c707 100644
+--- a/.coveragerc
++++ b/.coveragerc
+@@ -1,7 +1,7 @@
+ [run]
+ branch = True
+ source = quantum
+-omit = quantum/tests/*,quantum/plugins/cisco/tests/*,quantum/openstack/*
++omit = quantum/tests/*,quantum/plugins/cisco/tests/*,quantum/openstack/*,quantum/plugins/common,quantum/plugins/ryu/*,quantum/plugins/nec/*,quantum/plugins/bigswitch/*,quantum/plugins/openvswitch/*,quantum/plugins/hyperv/*,quantum/plugins/cisco/*,quantum/plugins/services/*,quantum/plugins/metaplugin/*,quantum/plugins/linuxbridge/*
+ 
+ [report]
+ ignore-errors = True
+-- 
+1.7.1
+

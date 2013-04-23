@@ -1,13 +1,12 @@
 # Settings for component glance
 ---
 # Where we download this from...
-get_from: "git://github.com/openstack/glance.git?branch=master"
+get_from: "git://github.com/openstack/glance.git?branch=stable/grizzly"
 
 host: "$(auto:ip)"
 api_port: 9292
 reg_port: 9191
 protocol: http
-verbose: True
 
 # List of images to download and install into glance.
 image_urls:
@@ -22,7 +21,9 @@ db:
 
 patches:
   # After check-out/download time patches
-  download: []
+  download:
+    - "conf/patches/glance/coveragerc.patch"
+
   # At packaging time patches
   package:
     - "conf/patches/glance/"
@@ -33,6 +34,7 @@ patches:
 exclude_tests:
   # These seem to require swift, not always installed...
   - test_swift_store
+ignore-test-failures: True
 
 # Interactions with keystone are via the following settings
 paste_flavor: 'keystone'

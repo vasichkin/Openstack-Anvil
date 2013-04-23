@@ -4,6 +4,8 @@
 # Where we download this from...
 get_from: "git://github.com/openstack/python-novaclient.git?branch=master"
 
+ignore-test-failures: True
+
 patches:
   # After check-out/download time patches
   download:

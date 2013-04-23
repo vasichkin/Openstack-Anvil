@@ -117,6 +117,39 @@ components:
             removable: false
         -   name: python-setuptools
             removable: false
+
+        # Folowing packages solves lots of problems that occurs periodically
+        # Community guys often forget to mention devel packages in required
+        -   name: libudev-devel
+            removable: false
+        -   name: zlib-devel
+            removable: false
+        -   name: glibc-devel
+            removable: false
+#        -   name: libxml2-devel
+#            removable: false
+#        -   name: libxslt-devel
+#            removable: false
+        -   name: libmemcached-devel
+            removable: false
+        -   name: libudev-devel
+            removable: false
+        -   name: mysql-devel
+            removable: false
+        -   name: libudev-devel
+            removable: false
+        -   name: postgresql-devel
+            removable: false
+#        -   name: python-devel
+#            removable: false
+        -   name: openldap-devel
+            removable: false
+        -   name: sqlite-devel
+            removable: false
+#        -   name: postgresql-devel
+#            removable: false
+
+
         pip_to_package:
         # Shared pypi packages + their package information.
         # Packages is what is really used for installation (the pypi name
@@ -145,9 +178,6 @@ components:
                     links:
                         - source: "/usr/lib/python2.6/site-packages/PasteDeploy-1.5*-py2.6.egg/paste/deploy"
                           target: "/usr/lib/python2.6/site-packages/paste/deploy"
-        -   name: pysqlite
-            package:
-                name: python-sqlite2
         -   name: routes
             package:
                 name: python-routes1.12
@@ -201,7 +231,6 @@ components:
         -   name: pep8 # The rhel version appears to not be new enough...
         -   name: pylint # The rhel version appears to not be new enough...
         -   name: prettytable
-            version: "0.6.1"
         -   name: pycrypto
             version: "2.6"
             options: # Force it to upgrade if its there already
@@ -220,15 +249,18 @@ components:
         -   name: sqlalchemy-migrate
         -   name: testrepository
         -   name: testtools # Seems like the version in rhel is to old...
+        -   name: oslo.config
+            version: "1.1.0"
     glance:
         action_classes:
             install: anvil.components.glance:GlanceInstaller
             package: anvil.packaging.rpm:PythonPackager
             running: anvil.components.glance:GlanceRuntime
-            test: anvil.components.glance:GlanceTester
+            test: anvil.components:PythonTestingComponent
             uninstall: anvil.components.glance:GlanceUninstaller
         packages:
         -   name: MySQL-python
+        -   name: python-swiftclient
         pips:
         -   name: boto
         -   name: wsgiref
@@ -238,7 +270,7 @@ components:
             install: anvil.components.glance_client:GlanceClientInstaller
             package: anvil.packaging.rpm:PythonPackager
             running: anvil.components:EmptyRuntime
-            test: anvil.components.glance_client:GlanceClientTester
+            test: anvil.components:PythonTestingComponent
             uninstall: anvil.components:PythonUninstallComponent
         pips:
         -   name: nosexcover
@@ -273,11 +305,14 @@ components:
             uninstall: anvil.components.keystone:KeystoneUninstaller
         packages:
         -   name: MySQL-python
+        -   name: python-ldap # needed for tests
+        -   name: python-memcached # needed for tests
         pips:
         -   name: pam
             version: '0.1.4'
         -   name: nosexcover
         -   name: webtest  # This version in package form conflicts with webob1.0
+        -   name: pysqlite # needed latest version
     keystone-client:
         action_classes:
             install: anvil.components:PythonInstallComponent
@@ -294,6 +329,8 @@ components:
             uninstall: anvil.components.nova:NovaUninstaller
         packages:
         -   name: MySQL-python
+        -   name: python-importlib # needed for tests
+        -   name: sqlite-devel #needed for tests
         # Helpful utilities/core
         # system requirements
         -   name: dnsmasq
@@ -328,8 +365,10 @@ components:
         -   name: stevedore
         -   name: discover
         -   name: psycopg2
+        -   name: pysqlite # needed latest version
         -   name: suds # The version in rhel doesn't work...
         -   name: Babel # The version in rhel doesn't work...
+        -   name: netaddr
         subsystems:
             compute:
                 packages:
@@ -399,6 +438,10 @@ components:
             uninstall: anvil.components:PythonUninstallComponent
         pips:
         -   name: cliff-tablib
+        -   name: flake8
+        -   name: hacking
+        packages:
+        -   name: python-d2to1
     rabbit-mq:
         action_classes:
             install: anvil.components.rabbit:RabbitInstaller

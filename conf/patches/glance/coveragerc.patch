@@ -1,0 +1,25 @@
+From 183dbe45f16f160e01071a4d6f260fb7f8819fd4 Mon Sep 17 00:00:00 2001
+From: root <root@a010.altai-dev.griddynamics.net>
+Date: Tue, 19 Mar 2013 03:49:36 +0400
+Subject: [PATCH] 2
+
+---
+ .coveragerc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/.coveragerc b/.coveragerc
+index be0ead6..42a2132 100644
+--- a/.coveragerc
++++ b/.coveragerc
+@@ -1,7 +1,7 @@
+ [run]
+ branch = True
+ source = glance
+-omit = glance/tests/*,glance/openstack/*
++omit = glance/tests/*,glance/openstack/*,glance/store/swift.py,glance/store/s3.py,glance/store/rbd.py,glance/store/scrubber.py,glance/db/sqlalchemy/migrate_repo/versions/*
+ 
+ [report]
+ ignore-errors = True
+-- 
+1.7.1
+

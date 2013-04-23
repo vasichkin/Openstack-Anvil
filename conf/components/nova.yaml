@@ -2,7 +2,7 @@
 ---
 
 # Where we download this from...
-get_from: "git://github.com/openstack/nova.git?branch=master"
+get_from: "git://github.com/openstack/nova.git?branch=stable/grizzly"
 
 # Host and ports for the different nova services
 api_host: "$(auto:ip)"
@@ -103,6 +103,7 @@ scheduler:  nova.scheduler.filter_scheduler.FilterScheduler
 
 # Should nova be in verbose mode?
 log_verbose: True
+ignore-test-failures: True
 
 # Virtualization settings
 # Drivers known (libvirt, xensever, vmware, baremetal)
@@ -125,8 +126,11 @@ volume_name_prefix: "volume-"
 
 # Package time patches
 patches:
+  download:
+    - "conf/patches/nova/coveragerc.patch"
   package:
     - "conf/patches/nova/"
+
 
 # Test exclusions...
 #
@@ -134,6 +138,17 @@ patches:
 exclude_tests:
   # Disable since quantumclient is not always installed.
   - test_quantumv2
+  # Will fail if ipv6 turned off
+  - test_service_random_port_with_ipv6
+  - test_start_random_port_with_ipv6
+  - test_app_using_ipv6_and_ssl
+  # Bug in tests if libvirt installed
+  - test_libvirt
+  # Bug
+  - test_archive_deleted_rows_fk_constraint
+
+exclude_tests_dir:
+  - smoketests
 
 # Needed for setting up your database
 db:

@@ -1,0 +1,25 @@
+From 6165c2efd9d6686d65d00beb136510aafb014076 Mon Sep 17 00:00:00 2001
+From: root <root@a010.altai-dev.griddynamics.net>
+Date: Tue, 19 Mar 2013 03:54:11 +0400
+Subject: [PATCH] coveragerc
+
+---
+ .coveragerc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/.coveragerc b/.coveragerc
+index c89967d..7cfe0e7 100644
+--- a/.coveragerc
++++ b/.coveragerc
+@@ -1,7 +1,7 @@
+ [run]
+ branch = True
+ source = nova
+-omit = nova/tests/*,nova/openstack/*,DynamicallyCompiledCheetahTemplate.py
++omit = nova/tests/*,nova/openstack/*,DynamicallyCompiledCheetahTemplate.py,nova/virt/hyperv/*,nova/virt/powervm/*,nova/virt/xenapi/*,nova/virt/vmwareapi/*,nova/api/openstack/compute/contrib/coverage_ext.py,nova/db/sqlalchemy/migrate_repo/versions/*
+ 
+ [report]
+ ignore-errors = True
+-- 
+1.7.1
+

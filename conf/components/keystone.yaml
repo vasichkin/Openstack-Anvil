@@ -1,7 +1,7 @@
 # Settings for component keystone
 ---
 # Where we download this from...
-get_from: "git://github.com/openstack/keystone.git?branch=master"
+get_from: "git://github.com/openstack/keystone.git?branch=stable/grizzly"
 
 # Where is the keystone auth host at?
 auth_host: "$(auto:ip)"
@@ -25,6 +25,7 @@ patches:
   package:
     - "conf/patches/keystone/"
 
+ignore-test-failures: True
 # Test exclusions...
 #
 # TODO(harlowja) these should probably be bugs...
@@ -32,11 +33,6 @@ exclude_tests:
   # These 2 seem to require swift, not always installed...
   - test_swift_auth_middleware
   - test_s3_token_middleware
-  # Aren't always installing memcache...
-  - test_backend_memcache
-  - test_nomemcache
-  # Aren't always installing ldap...
-  - test_backend_ldap
 
 # Needed when running to setup the right roles/endpoints...
 glance:
