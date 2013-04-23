@@ -241,10 +241,3 @@ class GlanceRuntime(comp.PythonRuntime):
                 params['cache_dir'] = cache_dir
             ghelper.UploadService(**params).install(self._get_image_urls())
 
-
-class GlanceTester(comp.PythonTestingComponent):
-    # NOTE: only run the unit tests
-    def _get_test_command(self):
-        base_cmd = comp.PythonTestingComponent._get_test_command(self)
-        base_cmd = base_cmd + ['--unittests-only']
-        return base_cmd
